@@ -17,3 +17,17 @@
 .organizers{margin-top:42px;padding-block:26px;border-block:1px solid var(--line)}.organizers .eyebrow{color:var(--muted)}.organizer-names{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px;margin-top:12px;font-family:var(--display);font-size:clamp(19px,2.1vw,25px);font-weight:600;letter-spacing:-.5px}.organizer-names>span{color:#65816b}
 
 .schedule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin:0 0 40px}.schedule-grid>div{border-top:1px solid #3b5555;padding-top:20px}.schedule-grid dt{font-size:12px;color:var(--green)}.schedule-grid dd{margin:10px 0 0;font-family:var(--display);font-size:20px;line-height:1.4}.hero-location div{min-width:0}@media(max-width:800px){.schedule-grid{gap:20px}.schedule-grid dd{font-size:18px}}@media(max-width:520px){.schedule-grid{grid-template-columns:1fr;gap:20px}.hero-location div>span{line-height:1.7}}
+
+.site-header .brand-logo,.site-footer .brand-logo{padding-block:14px;gap:14px;letter-spacing:0;flex-shrink:0}
+.brand-logo>img{width:110px;height:auto;max-width:none;object-fit:contain}
+.brand-details{display:flex;flex-direction:column;gap:7px}
+.brand-name{font-family:var(--display);font-size:25px;font-weight:650;letter-spacing:-1px;white-space:nowrap}
+.brand-edition{font-size:17px;font-weight:500;letter-spacing:-.5px}
+.brand-location{font-family:var(--font);font-size:11px;font-weight:450;line-height:1.4;letter-spacing:.15px;color:var(--muted)}
+.setting-photo{margin:0;min-width:0}
+.setting-photo>img{width:100%;height:auto;border-radius:3px}
+.setting-photo figcaption{margin-top:12px;font-size:10px;line-height:1.7;color:var(--muted)}
+.setting-photo figcaption a{text-decoration:underline;text-underline-offset:2px}
+@media(max-width:800px){.site-header:has(.brand-logo){flex-wrap:wrap;justify-content:flex-start;gap:10px;padding-block:10px 19px}.site-header:has(.brand-logo) nav{width:100%;justify-content:space-between}.site-header .brand-logo{padding-block:4px}}
+@media(max-width:800px){.site-footer:has(.brand-logo){flex-wrap:wrap}.site-footer .brand-logo{padding-block:0}}
+@media(max-width:520px){.brand-logo>img{width:86px}.site-header .brand-logo,.site-footer .brand-logo{gap:12px}.brand-name{font-size:23px}.brand-edition{font-size:15px}.brand-location{font-size:10px}.site-footer:has(.brand-logo){gap:22px}.site-footer:has(.brand-logo) p{text-align:left}}
