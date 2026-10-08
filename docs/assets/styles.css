@@ -31,3 +31,13 @@
 @media(max-width:800px){.site-header:has(.brand-logo){flex-wrap:wrap;justify-content:flex-start;gap:10px;padding-block:10px 19px}.site-header:has(.brand-logo) nav{width:100%;justify-content:space-between}.site-header .brand-logo{padding-block:4px}}
 @media(max-width:800px){.site-footer:has(.brand-logo){flex-wrap:wrap}.site-footer .brand-logo{padding-block:0}}
 @media(max-width:520px){.brand-logo>img{width:86px}.site-header .brand-logo,.site-footer .brand-logo{gap:12px}.brand-name{font-size:23px}.brand-edition{font-size:15px}.brand-location{font-size:10px}.site-footer:has(.brand-logo){gap:22px}.site-footer:has(.brand-logo) p{text-align:left}}
+
+/* University host marks: restrained grey treatment on the paper background. */
+.host-logos{display:flex;flex-wrap:wrap;align-items:center;gap:28px 44px;margin-top:18px}
+.host-logo{display:flex;align-items:center;justify-content:center;flex:0 0 auto;padding:12px;min-height:112px;border-radius:3px}
+.host-logo img{display:block;width:250px;height:auto;max-width:100%;object-fit:contain}
+.host-logo-calgary{margin-left:-24px}
+.host-logo-calgary img{width:310px;mix-blend-mode:multiply;opacity:.65;filter:grayscale(1)}
+.host-logo-guelph img{filter:grayscale(1) brightness(.45)}
+.host-logo:hover,.host-logo:focus-visible{background:var(--cream)}
+@media(max-width:600px){.host-logos{flex-direction:column;align-items:flex-start;gap:8px;margin-top:10px}.host-logo{min-height:100px}.host-logo-calgary{margin-left:-20px}.host-logo-calgary img{width:290px}.host-logo-guelph img{width:235px}}
