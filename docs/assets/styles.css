@@ -41,3 +41,8 @@
 .host-logo-guelph img{filter:grayscale(1) brightness(.45)}
 .host-logo:hover,.host-logo:focus-visible{background:var(--cream)}
 @media(max-width:600px){.host-logos{flex-direction:column;align-items:flex-start;gap:8px;margin-top:10px}.host-logo{min-height:100px}.host-logo-calgary{margin-left:-20px}.host-logo-calgary img{width:290px}.host-logo-guelph img{width:235px}}
+
+/* Microsoft CMT acknowledgement: required verbatim, must stay visible at every width. */
+.site-footer{flex-wrap:wrap}
+.footer-ack{flex-basis:100%;margin-top:4px;padding-top:18px;border-top:1px solid var(--line);font-size:10px;line-height:1.7;color:var(--muted);max-width:none;text-align:left}
+@media(max-width:520px){.site-footer .footer-ack{text-align:left}}
