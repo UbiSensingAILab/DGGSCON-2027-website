@@ -126,3 +126,4 @@
 .cfp-sublist li{position:relative;padding-left:22px;font-size:14px;color:var(--muted);line-height:1.7}
 .cfp-sublist li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border:1px solid #8aa888;border-radius:50%}
 @media(max-width:520px){.cfp-sublist li{font-size:13px}}
+.cfp-copy code{font-family:ui-monospace,'Cascadia Mono',Consolas,monospace;font-size:.9em;background:#e9eee1;border:1px solid #d5dfcd;border-radius:3px;padding:1px 5px}
