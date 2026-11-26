@@ -95,6 +95,8 @@
 .cfp-dates .fine-rule{background:#3b5555}
 .cfp-dates .status-pill{color:var(--green)}
 .cfp-dates .section-intro>p{color:#b9c9be}
+.cfp-dates-heading{font-family:var(--font);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:44px 0 14px}
+.cfp-dates-heading:first-of-type{margin-top:0}
 .cfp-dates-list{margin:0;border-top:1px solid #3b5555}
 .cfp-dates-list>div{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 40px;padding-block:20px;border-bottom:1px solid #3b5555}
 .cfp-dates-list dt{font-size:15px;max-width:620px;line-height:1.6}
