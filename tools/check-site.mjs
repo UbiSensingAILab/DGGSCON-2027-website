@@ -440,6 +440,82 @@ check('toc-no-orphan', () => {
   return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
 });
 
+check('social-meta', () => {
+  // Link previews in Slack, LinkedIn and email need an absolute image URL;
+  // relative paths are resolved against the scraper, not the site.
+  const bad = [];
+  for (const page of PAGES) {
+    const s = read(page);
+    for (const prop of ['og:image', 'og:url']) {
+      const m = s.match(new RegExp(`<meta property="${prop}" content="([^"]+)"`));
+      if (!m) { bad.push(`${page}: no ${prop}`); continue; }
+      if (!/^https:\/\//.test(m[1])) bad.push(`${page}: ${prop} must be absolute, got "${m[1]}"`);
+    }
+  }
+  return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
+});
+
+check('font-loading', () => {
+  const bad = [];
+  // @import inside the stylesheet serialises three round trips before styled
+  // text paints; a <link> in the head starts the font fetch immediately.
+  if (/@import[^;]*fonts\.googleapis/.test(css())) bad.push('styles.css still @imports the font CSS');
+  for (const page of PAGES) {
+    const s = read(page);
+    if (!/<link[^>]+rel="preconnect"[^>]+fonts\.gstatic\.com/.test(s)) bad.push(`${page}: no preconnect to fonts.gstatic.com`);
+    if (!/<link[^>]+href="https:\/\/fonts\.googleapis\.com[^"]*"[^>]*rel="stylesheet"|<link[^>]+rel="stylesheet"[^>]+href="https:\/\/fonts\.googleapis\.com/.test(s)) {
+      bad.push(`${page}: font stylesheet not linked in the head`);
+    }
+  }
+  // The hero is the largest contentful paint on the homepage.
+  if (!/<img[^>]+banff-hero\.jpg[^>]*fetchpriority="high"/.test(read('index.html'))) {
+    bad.push('hero image has no fetchpriority="high"');
+  }
+  return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
+});
+
+check('favicon', () => {
+  const bad = [];
+  for (const page of PAGES) {
+    const s = read(page);
+    const icons = [...s.matchAll(/<link[^>]+rel="icon"[^>]*>/g)].map((m) => m[0]);
+    if (!icons.length) { bad.push(`${page}: no favicon`); continue; }
+    if (!icons.some((i) => /icon\.svg/.test(i))) {
+      bad.push(`${page}: favicon should be the square assets/icon.svg, not the wide logo`);
+    }
+  }
+  return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
+});
+
+check('no-dead-css', () => {
+  const sheet = stripComments(css());
+  const used = new Set();
+  for (const page of PAGES) {
+    for (const m of read(page).matchAll(/class="([^"]+)"/g)) {
+      for (const c of m[1].split(/\s+/)) if (c) used.add(c);
+    }
+  }
+  const defined = new Set();
+  for (const m of sheet.matchAll(/\.([a-zA-Z][\w-]*)/g)) defined.add(m[1]);
+  const orphanRules = [...defined].filter((c) => !used.has(c));
+  const unstyled = [...used].filter((c) => !defined.has(c));
+  const bad = [];
+  if (orphanRules.length) bad.push(`CSS classes no page uses: ${orphanRules.sort().join(', ')}`);
+  if (unstyled.length) bad.push(`HTML classes with no rule: ${unstyled.sort().join(', ')}`);
+  return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
+});
+
+check('phone-header-compact', () => {
+  // A sticky header ~150px tall eats a quarter of a phone viewport for the
+  // whole visit. It releases at the width where the nav wraps to a full row.
+  const narrow = mediaBlock(560);
+  if (!narrow) return { ok: false, detail: 'no max-width:560px block' };
+  if (!/\.site-header\s*\{[^}]*position\s*:\s*static/.test(narrow)) {
+    return { ok: false, detail: 'header stays sticky at phone width' };
+  }
+  return { ok: true };
+});
+
 check('assets-exist', () => {
   const bad = [];
   for (const a of REQUIRED_ASSETS) if (!existsSync(join(DOCS, a))) bad.push(`missing ${a}`);

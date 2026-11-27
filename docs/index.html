@@ -8,9 +8,17 @@
   <meta property="og:title" content="DGGSCon 2027 — 1st International Conference on Discrete Global Grid Systems">
   <meta property="og:description" content="25–27 October 2027 at Banff Centre, Banff, Alberta, Canada. Full papers, short papers and industry abstracts.">
   <meta property="og:type" content="website">
+  <!-- Absolute, because link-preview scrapers resolve these against themselves,
+       not against the site. Update both if the site moves to a custom domain. -->
+  <meta property="og:url" content="https://ubisensingailab.github.io/DGGSCON-2027-website/">
+  <meta property="og:image" content="https://ubisensingailab.github.io/DGGSCON-2027-website/assets/banff-hero.jpg">
+  <meta property="og:image:alt" content="Banff Avenue in autumn, with Cascade Mountain rising behind the town.">
   <title>DGGSCon 2027 — 1st International Conference on Discrete Global Grid Systems</title>
-  <link rel="icon" href="assets/dggscon-logo.png" type="image/png">
-  <link rel="stylesheet" href="assets/styles.css?v=8">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/styles.css?v=9">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -34,7 +42,7 @@
 
   <main id="main">
     <div class="hero" id="top">
-      <img src="assets/banff-hero.jpg" alt="Banff Avenue in autumn, with Cascade Mountain rising behind the town." width="2400" height="1497">
+      <img src="assets/banff-hero.jpg" fetchpriority="high" alt="Banff Avenue in autumn, with Cascade Mountain rising behind the town." width="2400" height="1497">
       <div class="shell">
         <h1>DGGSCon 2027</h1>
         <p class="hero-title">1st International Conference on Discrete Global Grid Systems</p>
@@ -165,7 +173,7 @@
   <footer class="site-footer">
     <div class="shell">
       <p class="footer-id"><b>DGGSCon 2027</b><br>1st International Conference on Discrete Global Grid Systems<br>Banff Centre, Banff, Alberta, Canada · 25–27 October 2027</p>
-      <p class="footer-contact"><a href="call-for-participation.html#contact">Contact</a></p>
+      <p><a href="call-for-participation.html#contact">Contact</a></p>
       <p class="footer-ack">The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
     </div>
   </footer>
