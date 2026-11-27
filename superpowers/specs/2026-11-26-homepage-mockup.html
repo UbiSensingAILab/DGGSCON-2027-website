@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Direction B — consistent single-column layout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:#fff;color:#16242a;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;line-height:1.18;letter-spacing:-.4px}
+img{display:block;max-width:100%}
+.shell{width:min(1100px,100% - 56px);margin-inline:auto}
+
+header{border-bottom:1px solid #e2e7e8;background:#fff;position:sticky;top:0;z-index:5}
+header .shell{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:13px}
+.brand{display:flex;align-items:center;gap:13px}
+.brand img{width:80px}
+.brand b{font-size:19px;font-weight:600;letter-spacing:-.3px}
+nav{display:flex;gap:25px;align-items:center;font-size:16px;font-weight:500;flex-wrap:wrap}
+nav a:hover{color:#16514a}
+nav .cta{background:#16514a;color:#fff;padding:10px 17px;border-radius:4px;font-weight:600}
+nav .cta:hover{background:#0f3d38;color:#fff}
+
+.hero{position:relative;color:#fff;min-height:440px;display:flex;align-items:flex-end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,30,32,.22) 0%,rgba(10,30,32,.84) 80%)}
+.hero .shell{position:relative;z-index:1;padding-block:64px 44px}
+.hero h1{font-size:52px;font-weight:700;letter-spacing:-1.7px}
+.hero .full{font-size:21px;font-weight:500;margin:13px 0 0;max-width:640px;color:#e4efec}
+.hero .meta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:22px;font-size:18px}
+.hero .meta b{font-weight:600}
+.hero .meta .sep{opacity:.5}
+.btn{display:inline-block;background:#fff;color:#123f3a;padding:14px 22px;border-radius:4px;font-weight:600;font-size:16px;margin-top:26px}
+.credit{position:absolute;right:14px;bottom:8px;z-index:1;font-size:12px;color:rgba(255,255,255,.72)}
+
+.announce{background:#f4f7f6;border-bottom:1px solid #e2e7e8}
+.announce .shell{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;padding-block:16px;font-size:17px}
+.announce .tag{font-size:13px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;color:#16514a;white-space:nowrap}
+.announce p{margin:0}
+.link{color:#16514a;font-weight:600;border-bottom:2px solid #c6dad3;padding-bottom:1px}
+
+section{padding-block:56px;scroll-margin-top:70px}
+section+section{border-top:1px solid #e9eded}
+h2{font-size:30px;font-weight:600;margin-bottom:20px}
+p{margin:0 0 16px}
+
+/* One measure for every full-width prose block */
+.prose{font-size:18px;line-height:1.75}
+.prose .lede{font-size:21px;line-height:1.55;font-weight:500;margin-bottom:18px}
+.prose p:not(.lede){color:#49595e}
+
+/* One row style, used by dates and by venue facts */
+.rows{list-style:none;margin:0;padding:0}
+.rows li{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding-block:14px;border-bottom:1px solid #e4e9ea;font-size:18px}
+.rows li>span:first-child{flex:1}
+.rows b{font-weight:600;white-space:nowrap;text-align:right}
+.rows .sub{display:block;font-size:15px;color:#6b7d81;margin-top:3px}
+.group{font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#16514a;margin:30px 0 2px}
+.group:first-of-type{margin-top:0}
+.note{font-size:16px;color:#5d7075;margin-top:22px}
+
+.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:4px}
+.tracks article{border-top:2px solid #16514a;padding-top:16px}
+.tracks h3{font-size:19px;font-weight:600;margin-bottom:8px}
+.tracks p{font-size:16px;color:#49595e;margin:0;line-height:1.7}
+
+.reg{background:#f4f7f6}
+.regpanel{border:1px solid #d9e2e0;background:#fff;border-radius:5px;padding:28px 30px}
+.regpanel h3{font-size:21px;font-weight:600;margin-bottom:10px}
+.regpanel p{font-size:18px;line-height:1.75;color:#49595e;margin-bottom:10px}
+.btn-wait{display:inline-block;margin-top:8px;border:1.5px dashed #a9bcb8;color:#5d7075;padding:12px 20px;border-radius:4px;font-size:16px;font-weight:600}
+
+.hosts{background:#fff;border-top:1px solid #e2e7e8}
+.hosts .shell{display:flex;align-items:center;gap:30px 60px;flex-wrap:wrap;padding-block:30px}
+.hosts .label{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#6b7d81}
+.hosts img{width:auto;height:42px}
+.host-calgary img{filter:grayscale(1);mix-blend-mode:multiply;opacity:.78}
+.host-guelph img{filter:grayscale(1) brightness(.42)}
+
+footer{background:#102b2d;color:#c9dad7;padding-block:30px 36px;font-size:15px}
+footer .shell{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+footer a{color:#e4efec;border-bottom:1px solid rgba(228,239,236,.4)}
+.cmt{flex-basis:100%;margin-top:22px;padding-top:18px;border-top:1px solid rgba(201,218,215,.25);font-size:14px;line-height:1.7;color:#9fb6b3;max-width:900px}
+@media(max-width:860px){.tracks{grid-template-columns:1fr}.rows li{font-size:17px}}
+</style>
+</head>
+<body>
+<header><div class="shell">
+  <a class="brand" href="#top"><img src="../../docs/assets/dggscon-logo.png" alt=""><b>DGGSCon 2027</b></a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#dates">Dates</a>
+    <a href="#programme">Programme</a>
+    <a href="#venue">Venue</a>
+    <a href="#registration">Registration</a>
+    <a class="cta" href="#">Call for Participation</a>
+  </nav>
+</div></header>
+
+<div class="hero" id="top">
+  <img src="HERO-IMAGE-PENDING.jpg" alt="">
+  <div class="shell">
+    <h1>DGGSCon 2027</h1>
+    <p class="full">1st International Conference on Discrete Global Grid Systems</p>
+    <div class="meta"><b>25–27 October 2027</b><span class="sep">·</span><span>Banff Centre, Banff, Alberta, Canada</span></div>
+    <a class="btn" href="#">Call for Participation</a>
+  </div>
+  <span class="credit">Photo: Rita Taylor</span>
+</div>
+
+<div class="announce"><div class="shell">
+  <span class="tag">Now open</span>
+  <p>The call for participation is open. Full and short papers are due 16 April 2027, industry abstracts 28 May 2027. <a class="link" href="#">Read the call →</a></p>
+</div></div>
+
+<section id="about"><div class="shell prose">
+  <h2>About the conference</h2>
+  <p class="lede">DGGS organize the Earth into systems of cells, creating a common framework for connecting and analysing geospatial information.</p>
+  <p>A DGGS is a spatial reference system that uses a hierarchical tessellation of cells to partition and address the globe. When observations, model outputs and statistics share one set of cells, heterogeneous data can be integrated and analysed from local to global scales.</p>
+  <p>DGGS have progressed from research frameworks to international standards and open-source software, and attract growing interest across academia, industry and the GeoAI community. DGGSCon 2027 brings together researchers, students, software and standards developers, and practitioners across the public and private sectors.</p>
+</div></section>
+
+<section id="dates"><div class="shell">
+  <h2>Important dates</h2>
+  <h3 class="group">Full and short papers</h3>
+  <ul class="rows">
+    <li><span>Paper submission</span><b>16 April 2027</b></li>
+    <li><span>Workshop and tutorial proposals<span class="sub">Then open until the rooms are filled</span></span><b>30 April 2027</b></li>
+    <li><span>Notification of acceptance</span><b>31 May 2027</b></li>
+    <li><span>Camera-ready due</span><b>13 August 2027</b></li>
+  </ul>
+  <h3 class="group">Industry track</h3>
+  <ul class="rows">
+    <li><span>Abstract submission</span><b>28 May 2027</b></li>
+    <li><span>Notification of acceptance</span><b>8 June 2027</b></li>
+  </ul>
+  <h3 class="group">Registration</h3>
+  <ul class="rows">
+    <li><span>Super early bird registration closes</span><b>15 June 2027</b></li>
+    <li><span>Early bird registration closes</span><b>15 July 2027</b></li>
+    <li><span>Author and presenter registration deadline</span><b>15 July 2027</b></li>
+    <li><span>Regular registration</span><b>From 16 July 2027</b></li>
+  </ul>
+  <h3 class="group">Conference</h3>
+  <ul class="rows">
+    <li><span>Workshops and tutorials</span><b>25 October 2027</b></li>
+    <li><span>Main conference</span><b>26–27 October 2027</b></li>
+  </ul>
+  <p class="note">All deadlines 23:59 Pacific Time (UTC−7). Full details are in the <a class="link" href="#">call for participation</a>.</p>
+</div></section>
+
+<section id="programme"><div class="shell">
+  <h2>Programme</h2>
+  <p class="prose" style="margin-bottom:28px;color:#49595e">One day of workshops and tutorials on 25 October, followed by two days of conference sessions on 26–27 October.</p>
+  <div class="tracks">
+    <article><h3>Workshops &amp; tutorials</h3><p>25 October. Half-day and full-day sessions on DGGS software, standards, methods and applications.</p></article>
+    <article><h3>Research &amp; applications</h3><p>26–27 October. Peer-reviewed papers on DGGS foundations, tools, analysis and GeoAI.</p></article>
+    <article><h3>Industry &amp; demonstrations</h3><p>26–27 October. Deployments, products and operational use, with working systems on show.</p></article>
+  </div>
+  <p class="note">The detailed schedule and keynote speakers will be published here.</p>
+</div></section>
+
+<section id="venue"><div class="shell">
+  <h2>Venue &amp; travel</h2>
+  <div class="prose">
+    <p class="lede">The conference is held at Banff Centre, in the mountains of Banff National Park, Alberta.</p>
+    <p>Banff Centre is a campus built for gatherings of this kind, with lecture theatres, breakout rooms and accommodation on site. The town of Banff is a short walk away, and Calgary International Airport is about 90 minutes by road.</p>
+  </div>
+  <ul class="rows" style="margin-top:12px">
+    <li><span>Venue</span><b>Banff Centre for Arts and Creativity</b></li>
+    <li><span>Address</span><b>107 Tunnel Mountain Drive, Banff, Alberta</b></li>
+    <li><span>Nearest airport</span><b>Calgary International (YYC)</b></li>
+    <li><span>Conference dates</span><b>25–27 October 2027</b></li>
+  </ul>
+  <p class="note">Accommodation and travel guidance will be published here.</p>
+</div></section>
+
+<section id="registration" class="reg"><div class="shell">
+  <h2>Registration</h2>
+  <div class="regpanel">
+    <h3>Registration is not yet open</h3>
+    <p>Fees, the registration link and accommodation booking will be published here. Super early bird registration closes 15 June 2027, and every author and presenter must register by 15 July 2027.</p>
+    <span class="btn-wait">Registration link — to come</span>
+  </div>
+</div></section>
+
+<div class="hosts"><div class="shell">
+  <span class="label">Hosted by</span>
+  <a class="host-calgary" href="#"><img src="../../docs/assets/calgary-cropped.jpg" alt="University of Calgary"></a>
+  <a class="host-guelph" href="#"><img src="../../docs/assets/university-of-guelph-logo.svg" alt="University of Guelph"></a>
+</div></div>
+
+<footer><div class="shell">
+  <div>DGGSCon 2027 · 1st International Conference on Discrete Global Grid Systems<br>Banff Centre, Banff, Alberta, Canada · 25–27 October 2027</div>
+  <div><a href="#">Contact</a></div>
+  <p class="cmt">The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
+</div></footer>
+</body>
+</html>
