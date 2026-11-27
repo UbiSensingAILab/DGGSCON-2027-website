@@ -175,6 +175,26 @@ check('no-ai-tells', () => {
   return bad.length ? { ok: false, detail: bad.slice(0, 4).join('; ') } : { ok: true };
 });
 
+check('hero-contrast', () => {
+  const s = css();
+  const bad = [];
+  const hero = s.match(/\.hero\s*\{[^}]*\}/);
+  if (!hero) bad.push('no .hero rule');
+  else if (!/background:\s*(var\(--footer\)|#(10|0f)[0-9a-f]{4})/i.test(hero[0])) {
+    bad.push('hero needs an opaque dark background behind the image');
+  }
+  const after = s.match(/\.hero::after\s*\{[^}]*\}/);
+  if (!after) bad.push('no .hero::after gradient');
+  else {
+    const stops = [...after[0].matchAll(/rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*(\.\d+|\d?\.\d+)\s*\)/g)]
+      .map((m) => parseFloat(m[1]));
+    if (!stops.length || Math.max(...stops) < 0.8) {
+      bad.push('gradient must end at >=0.8 alpha for text contrast over any photo');
+    }
+  }
+  return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
+});
+
 check('assets-exist', () => {
   const bad = [];
   for (const a of REQUIRED_ASSETS) if (!existsSync(join(DOCS, a))) bad.push(`missing ${a}`);

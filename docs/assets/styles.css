@@ -104,3 +104,77 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
 }
+
+/* --------------------------------------------------------------- header */
+.site-header{
+  position:sticky;top:0;z-index:5;
+  background:var(--page);
+  border-bottom:1px solid var(--rule);
+}
+.site-header .shell{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;padding-block:13px;
+}
+.brand{display:flex;align-items:center;gap:13px;flex-shrink:0}
+.brand img{width:80px;height:auto}
+.brand b{font-size:19px;font-weight:600;letter-spacing:-.3px}
+.site-header nav{
+  display:flex;align-items:center;flex-wrap:wrap;
+  gap:25px;font-size:16px;font-weight:500;
+}
+.site-header nav a:hover{color:var(--pine)}
+.site-header nav .cta{
+  background:var(--pine);color:#fff;
+  padding:10px 17px;border-radius:4px;font-weight:600;
+}
+.site-header nav .cta:hover{background:var(--pine-dark);color:#fff}
+.site-header nav [aria-current="page"]{color:var(--pine)}
+
+/* ----------------------------------------------------------------- hero */
+/* The dark background carries the white type before and without the photo. */
+.hero{
+  position:relative;
+  background:var(--footer);
+  color:#fff;
+  min-height:440px;
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+}
+.hero > img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+}
+.hero::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,30,32,.22) 0%,rgba(10,30,32,.84) 80%);
+}
+.hero .shell{position:relative;z-index:1;padding-block:64px 44px}
+.hero h1{
+  font-size:clamp(34px,7vw,52px);
+  font-weight:700;letter-spacing:-1.7px;
+}
+.hero-title{
+  font-size:clamp(17px,2.4vw,21px);
+  font-weight:500;margin:13px 0 0;max-width:640px;color:#e4efec;
+}
+.hero-meta{
+  display:flex;align-items:center;flex-wrap:wrap;gap:14px;
+  margin:22px 0 0;font-size:18px;
+}
+.hero-meta b{font-weight:600}
+.hero-meta .sep{opacity:.5}
+.btn-light{background:#fff;color:#123f3a;margin-top:26px}
+.btn-light:hover{background:#e4efec;color:#123f3a}
+
+/* -------------------------------------------------------- announcement */
+.announce{background:var(--panel);border-bottom:1px solid var(--rule)}
+.announce .shell{
+  display:flex;align-items:baseline;flex-wrap:wrap;
+  gap:14px;padding-block:16px;font-size:17px;
+}
+.announce .tag{
+  font-size:13px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;
+  color:var(--pine);white-space:nowrap;
+}
+.announce p{margin:0}
