@@ -46,8 +46,10 @@ Five things the spec implies, that no obvious task would test, ranked by how lik
 | `docs/index.html` | Rewrite to the agreed five-section structure. |
 | `docs/call-for-participation.html` | Modify: headings rewritten, numbered labels removed, restyled. Content, dates, anchor ids unchanged. |
 | `docs/assets/university-of-calgary-logo-cropped.jpg` | Create, from the existing logo via ffmpeg. |
-| `docs/assets/banff-hero.jpg` | Create. The chosen licence-clean hero photograph. |
+| `docs/assets/banff-hero.jpg` | Create. Pexels 40105389, cropped. No credit shown on the page. |
 | `docs/assets/globe.svg` | Delete. Retired with the illustrated hero. |
+| `docs/assets/banff-centre-autumn-rita-taylor.jpg` | Delete. No licence covers this use. |
+| `asset-credits.md` | Create at the repository root. Provenance record, not published. |
 
 ---
 
@@ -131,11 +133,26 @@ A pre-cropped copy is at `superpowers/specs/university-of-calgary-logo-cropped.j
 
 - [ ] **Step 2: Add the hero photograph**
 
-Save the chosen photo as `docs/assets/banff-hero.jpg`, at most 2400px wide and at most 600KB. **The choice is Erin's and must be made before this step** — either one of the three Pexels-licensed candidates or her own photograph. Do not reuse `banff-centre-autumn-rita-taylor.jpg`: no licence covers that use.
+Chosen: Pexels photo 40105389, Banff Avenue and Cascade Mountain from Cascade Gardens in autumn. A prepared 2400 × 1497 / 454 KB crop already exists at `.superpowers/brainstorm/188-1795737400/content/banff-hero.jpg`; copy it to `docs/assets/banff-hero.jpg`. To regenerate from the original instead:
 
-- [ ] **Step 3: Delete the retired illustration**
+```bash
+curl -sL -o orig.jpg "https://images.pexels.com/photos/40105389/pexels-photo-40105389.jpeg"
+ffmpeg -y -i orig.jpg -vf "crop=3456:2156:0:1514,scale=2400:-1" -q:v 5 docs/assets/banff-hero.jpg
+```
 
-Run: `git rm docs/assets/globe.svg`
+**No photo credit appears on the page.** The Pexels License requires none.
+
+- [ ] **Step 3: Delete the retired photograph and illustration**
+
+The old hero photo has no licence covering this use.
+
+```bash
+git rm docs/assets/globe.svg docs/assets/banff-centre-autumn-rita-taylor.jpg
+```
+
+- [ ] **Step 3b: Record provenance**
+
+Create `asset-credits.md` at the repository root (not under `docs/`, so it is never published). One entry per image in `docs/assets/`: file name, what it is, source URL, licence, date downloaded. Cover `banff-hero.jpg`, both university logos, the cropped Calgary logo and `dggscon-logo.png`. Where provenance is unknown, write "unknown" rather than guessing.
 
 - [ ] **Step 4: Verify**
 
@@ -180,7 +197,7 @@ Expected: FAIL — no `.hero` rule exists yet.
 
 - [ ] **Step 3: Build header, hero and announcement**
 
-Markup and CSS as in the mockup. The hero carries `background:#102b2d` beneath the image, the gradient runs `rgba(10,30,32,.22)` to `rgba(10,30,32,.84)`, and the photo credit is 13px, not 12px. Hero copy, button label and announcement text are fixed by the spec's Copy section — the deadline split matters: full and short papers 16 April, industry abstracts 28 May.
+Markup and CSS as in the mockup. The hero carries `background:#102b2d` beneath the image and the gradient runs `rgba(10,30,32,.22)` to `rgba(10,30,32,.84)`. There is no photo credit element. Hero copy, button label and announcement text are fixed by the spec's Copy section — the deadline split matters: full and short papers 16 April, industry abstracts 28 May.
 
 Nav: About · Dates · Programme · Venue · Registration · Call for Participation (the last an `<a class="cta">` to `call-for-participation.html`). Header `position:sticky`, with `html{scroll-padding-top:76px}` and `section{scroll-margin-top:70px}`.
 

@@ -185,8 +185,8 @@ Above the sections, in order:
    (`rgba(10,30,32,.22)` to `rgba(10,30,32,.84)`), with: `DGGSCon 2027`; the formal
    title *1st International Conference on Discrete Global Grid Systems*; one meta line
    reading `25–27 October 2027 · Banff Centre, Banff, Alberta, Canada`; a single
-   "Call for Participation" button. Photo credit "Photo: Rita Taylor" bottom right at 13px.
-   One button only — a second competes with the primary action for no gain.
+   "Call for Participation" button, and no photo credit. One button only — a second
+   competes with the primary action for no gain.
 3. **Announcement band** — panel background, a "NOW OPEN" tag, then:
    *"The call for participation is open. Full and short papers are due 16 April 2027,
    industry abstracts 28 May 2027."* with a "Read the call →" link. One fact, one action.
@@ -200,8 +200,9 @@ Below the sections: the **hosts band**, then the footer.
 The approved mockup is the copy source, not a description of one. Text that is fixed:
 
 **Hero.** `DGGSCon 2027` / *1st International Conference on Discrete Global Grid Systems* /
-`25–27 October 2027 · Banff Centre, Banff, Alberta, Canada` / button `Call for Participation` /
-credit `Photo: Rita Taylor`, hyperlinked to the source.
+`25–27 October 2027 · Banff Centre, Banff, Alberta, Canada` / button `Call for Participation`.
+**No photo credit.** The Pexels License requires none, and Erin chose to carry none rather
+than mark a licence the photograph does not have.
 
 **Announcement band.** Tag `NOW OPEN`, then: "The call for participation is open. Full and
 short papers are due 16 April 2027, industry abstracts 28 May 2027." with `Read the call →`.
@@ -315,6 +316,27 @@ Erin should read the new headings before this ships.
   footer text on `#102b2d`.
 - Hosts band logos keep their `alt` text.
 
+### Hero photograph
+
+The photograph the site carried until now — `banff-centre-autumn-rita-taylor.jpg`, taken
+from `tourismealberta.ca` — **has no licence covering this use** and is removed. Travel
+Alberta's terms grant a limited licence "for educational or personal, non-commercial
+purposes only" and prohibit third-party hosting; Banff Centre's media room offers the same
+file under a mandatory credit but states no scope for web use. Nobody obtained permission.
+
+Replaced with Pexels photo 40105389 — Banff Avenue and Cascade Mountain seen from Cascade
+Gardens, autumn. Downloaded at 3456 × 5184 and cropped with
+`ffmpeg -vf "crop=3456:2156:0:1514,scale=2400:-1" -q:v 5`, giving 2400 × 1497 at 454 KB,
+saved as `docs/assets/banff-hero.jpg`.
+
+**Pexels License:** free to use including commercially, no permission request, no
+attribution required. Its only restrictions — no use as a trade mark or business name, no
+implying endorsement by people or brands depicted — do not apply here.
+
+Provenance for every image is recorded in `asset-credits.md` at the repository root:
+source URL, licence, and the date downloaded. That file is the internal record; it is not
+a public claim and is not published.
+
 ## Verified facts
 
 Checked against `DGGSCON-2027/program/cfp/call-for-participation-draft.md` as of
@@ -345,9 +367,8 @@ first two; the rest were settled here and are recorded as my calls, not hers.
    CFP already carries the address in context. Revisit if a conference address exists.
 5. **`globe.svg` is retired** from the homepage; the file stays in the repository.
    Giving it a slot would introduce a third layout shape, against the discipline above.
-6. **The photo credit stays a hyperlink** to its source, as the current site has it.
-   Flagged, not resolved: Direction B depends on that photograph being usable as the
-   dominant image of the site. Nobody has checked the licence terms for that use.
+6. **The hero photograph is replaced and carries no credit.** Resolved 2026-11-26 — see
+   "Hero photograph" below.
 7. **No registration opening date** is published; none exists in anything available
    here. The section states registration is not open and lists the closing dates only.
 
