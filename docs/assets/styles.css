@@ -128,7 +128,10 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
   padding:10px 17px;border-radius:4px;font-weight:600;
 }
 .site-header nav .cta:hover{background:var(--pine-dark);color:#fff}
-.site-header nav [aria-current="page"]{color:var(--pine)}
+/* Plain nav links mark the current page with colour; the solid .cta button
+   cannot — the same colour on its own background would hide the label. */
+.site-header nav a:not(.cta)[aria-current="page"]{color:var(--pine)}
+.site-header nav .cta[aria-current="page"]{background:var(--pine-dark);color:#fff}
 
 /* ----------------------------------------------------------------- hero */
 /* The dark background carries the white type before and without the photo. */

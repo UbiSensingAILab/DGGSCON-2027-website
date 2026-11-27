@@ -224,6 +224,24 @@ check('responsive-rules', () => {
   return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
 });
 
+check('nav-current-legible', () => {
+  const s = css();
+  const bad = [];
+  // A bare `nav [aria-current="page"] { color }` also hits the solid-background
+  // .cta button, painting its label the same colour as its background.
+  const bare = s.match(/\.site-header nav \[aria-current="page"\]\s*\{[^}]*color\s*:[^}]*\}/);
+  if (bare) bad.push('current-page colour rule also applies to the .cta button, hiding its label');
+  // Any page marking a nav link current must still render that label.
+  for (const page of PAGES) {
+    const m = read(page).match(/<a[^>]*aria-current="page"[^>]*>/);
+    if (m && /class="[^"]*\bcta\b/.test(m[0])) {
+      const scoped = /\.cta\[aria-current="page"\]\s*\{[^}]*color\s*:\s*(#fff|#ffffff|white)/i.test(s);
+      if (!scoped) bad.push(`${page}: .cta is marked current but has no legible current style`);
+    }
+  }
+  return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
+});
+
 check('assets-exist', () => {
   const bad = [];
   for (const a of REQUIRED_ASSETS) if (!existsSync(join(DOCS, a))) bad.push(`missing ${a}`);
