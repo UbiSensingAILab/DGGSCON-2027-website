@@ -1,0 +1,280 @@
+# DGGSCon 2027 website redesign — design
+
+Date: 2026-11-26
+Status: approved, ready to plan
+Branch: `redesign`
+
+> Location note: the brainstorming convention puts this under `docs/`, but `AGENTS.md`
+> publishes `docs/` through GitHub Pages, so a design document there would appear on
+> the public site. It lives at the repository root instead, alongside the other
+> maintenance material.
+
+## Intent and why
+
+The current site reads as AI-generated. That is the problem being solved — not a
+vague wish for "nicer". The specific devices that produce the impression were
+identified by comparing the page against six real conference sites (CHI 2025,
+NeurIPS 2025, ICML 2025, FOSS4G 2025, State of the Map 2025, AGILE 2025):
+
+- Poetic two-line couplets as headings: "The world, / cell by cell.",
+  "A world of cells. / A community of people.", "Think globally. / Meet in the Rockies."
+- Numbered section labels with hairline rules: `01 / ABOUT`, `02 / PROGRAMME`.
+- Decorative fake telemetry on the globe illustration: `LOCAL CELLS. GLOBAL CONNECTIONS.`
+  and `01 / 27`.
+- A band of single words separated by asterisks: Research ✳ Development ✳ Applications.
+- Terse declarative headlines ending in periods: "Ideas meet practice."
+- Extreme negative letter-spacing on very large display type (−5.5px at 93px).
+
+Not one of the six reference sites uses any of these. Their entire decorative
+vocabulary is `»` on links and a single horizontal rule style. They lead with
+facts — conference name, dates, city — within the first few lines, label navigation
+with plain nouns, and title sections with nouns ("Important Dates", "Registration",
+"Venue").
+
+The second, independent problem: text is too small to read comfortably. The current
+stylesheet sets text at 8px (globe caption strip), 9px (programme tags) and a great
+deal at 10–11px (section labels, status pills, footer, CMT acknowledgement, photo
+credits). At the 520px breakpoint the globe strip drops to 6px.
+
+This matters now because the call for participation is live and the site is the
+public face of a real conference soliciting submissions and travel to Alberta.
+
+## Goals
+
+1. The site reads as a professional academic conference site to someone who knows the genre.
+2. Nothing on either page is smaller than 13px.
+3. The homepage leads with what the conference is, when it is, and where.
+4. Navigation items correspond one-to-one with sections that exist on the page.
+5. Every date shown matches `DGGSCON-2027/program/cfp/call-for-participation-draft.md`.
+
+## Non-goals
+
+- No new pages beyond the existing two (homepage, call for participation).
+- No CMS, framework, build step or JavaScript dependency. The site stays buildless
+  static HTML and CSS, per `AGENTS.md`.
+- No sponsors section and no organizers/committee section on the homepage — explicitly
+  declined, because the committee is largely "TBC" and there are no sponsors.
+- No countdown timer, no news/announcement feed, no tiered sponsor grid.
+- No change to the call for participation's *content*; that document is the source of
+  record and was updated separately. This redesign restyles the page, it does not rewrite it.
+
+## Anti-goals
+
+Things that would make this a failure even if it technically worked:
+
+- Any reintroduction of the devices listed under Intent. If a future change wants a
+  numbered section label, an eyebrow micro-label, a decorative metadata strip or a
+  two-line poetic headline, that change is wrong.
+- Inventing conference facts. Speakers, sponsors, endorsements, publication
+  arrangements, deadlines and prices come from the CFP or the private planning repo,
+  or they are left out (`AGENTS.md`).
+- Hedged copy. `AGENTS.md` requires a definite voice; confirmed details are stated as
+  fact, and unreleased details are described as "will be published here".
+- Losing the Microsoft CMT acknowledgement. It is required verbatim and must stay visible.
+
+## Constraints
+
+- Buildless static site; relative asset paths so it works at the project URL and a
+  future custom domain.
+- Publish only `docs/`; maintenance material at the root.
+- Lowercase hyphen-separated filenames.
+- Keyboard access, visible focus, readable contrast, responsive layout, reduced-motion.
+- The only permitted external resource is Google Fonts, which the site already uses.
+
+## Approaches
+
+Three directions were built as working pages and reviewed in a browser.
+
+**A — Conference of record.** Serif masthead carrying the full conference name,
+deadlines in a right sidebar, an announcements feed. Closest to AGILE, ICML and
+NeurIPS. Rejected: it projects an institutional history a first edition does not
+have, and it wastes the Banff photography, which is a genuine draw.
+
+**B — Place-led.** Banff photograph full-bleed with the name, dates and venue over
+it; facts-first; plain noun navigation. Closest to FOSS4G and CHI. **Chosen.** For a
+first-edition conference asking people to fly to Alberta, the mountains are an
+argument rather than decoration, and the facts-first hero is what every reference
+site does.
+
+**C — Current identity, cleaned up.** Keeps the existing paper-and-pine palette, logo
+and Manrope/DM Sans pairing, with the AI tells stripped and the structure fixed.
+Rejected as the primary direction: the homepage would still lead with abstraction
+rather than with what and when. It was the cheapest option and remains the fallback
+if the palette change below is ever reversed.
+
+## The design
+
+### Visual language
+
+Direction B's palette replaces the current paper-and-pine one. **This retires the
+`#f5f4eb` paper background and the Manrope/DM Sans pairing.** The logo and the Banff
+photograph carry over unchanged.
+
+| Token | Value | Use |
+|---|---|---|
+| Page | `#ffffff` | Body background |
+| Ink | `#16242a` | Primary text |
+| Muted | `#49595e` | Body paragraphs inside prose blocks |
+| Muted light | `#5d7075` | Notes, captions, secondary labels |
+| Pine | `#16514a` | Links, primary buttons, group labels, section rules |
+| Pine dark | `#0f3d38` | Button hover |
+| Footer | `#102b2d` | Footer background |
+| Footer text | `#c9dad7` | Footer text |
+| Panel | `#f4f7f6` | Announcement band, registration section |
+| Rule | `#e2e7e8` / `#e4e9ea` / `#e9eded` | Borders, row hairlines, section dividers |
+
+Typeface: **Inter** (400, 500, 600, 700) from Google Fonts, replacing DM Sans and Manrope.
+
+### Type scale
+
+Base 17px / 1.65. **Minimum size anywhere on the site: 13px.**
+
+| Element | Size |
+|---|---|
+| `h1` hero | 52px, 700, −1.7px tracking |
+| Hero subtitle (formal title) | 21px, 500 |
+| Hero meta line | 18px |
+| `h2` section | 30px, 600 |
+| `h3` | 19–21px, 600 |
+| Prose blocks (About, Venue, Registration) | 18px / 1.75 |
+| Lede paragraph | 21px / 1.55, 500 |
+| Row lists (dates, venue facts) | 18px |
+| Body default, nav, announcement | 16–17px |
+| Notes, group labels, host label, CMT | 13–16px |
+
+Prose runs the full page width, which gives a 100–110 character line where 60–80 is
+comfortable. 18px with 1.75 line-height is the agreed mitigation. This was raised as
+a concern, reviewed on screen and accepted.
+
+### Layout discipline
+
+The page has **two shapes only**:
+
+1. **Full-width blocks** — prose and row lists, running margin to margin.
+2. **One three-column block** — the Programme strands.
+
+This was the main correction during review: the earlier draft changed column count
+four times down the page and read as cluttered. Dates and venue facts share a single
+row style — label left, value hard right, hairline between — so the two sections
+visually rhyme rather than each inventing a layout.
+
+Page container: `width: min(1100px, 100% - 56px)`, centred.
+
+### Homepage structure
+
+Nav order mirrors page order exactly, and every item resolves to a real section.
+
+| Nav label | Anchor | Section |
+|---|---|---|
+| About | `#about` | What DGGS are, who the conference is for. Lede plus two paragraphs. |
+| Dates | `#dates` | All deadlines, grouped: Full and short papers / Industry track / Registration / Conference. |
+| Programme | `#programme` | Intro line plus the three strands. |
+| Venue | `#venue` | Banff Centre prose, then a facts list. |
+| Registration | `#registration` | States it is not open; holds an inert placeholder for the link. |
+| Call for Participation | `call-for-participation.html` | The one off-page link, styled as the primary button. |
+
+Above the sections, in order:
+
+1. **Sticky header** — logo, "DGGSCon 2027", the nav. `scroll-padding-top: 76px` and
+   `scroll-margin-top: 70px` on sections so headings do not hide behind it.
+2. **Hero** — Banff photograph full-bleed, gradient overlay
+   (`rgba(10,30,32,.22)` to `rgba(10,30,32,.84)`), with: `DGGSCon 2027`; the formal
+   title *1st International Conference on Discrete Global Grid Systems*; one meta line
+   reading `25–27 October 2027 · Banff Centre, Banff, Alberta, Canada`; a single
+   "Call for Participation" button. Photo credit "Photo: Rita Taylor" bottom right at 13px.
+   One button only — a second competes with the primary action for no gain.
+3. **Announcement band** — panel background, a "NOW OPEN" tag, then:
+   *"The call for participation is open. Full and short papers are due 16 April 2027,
+   industry abstracts 28 May 2027."* with a "Read the call →" link. One fact, one action.
+   The deadline split matters: an earlier draft wrongly gave all three submission types
+   the 16 April date.
+
+Below the sections: the **hosts band**, then the footer.
+
+### Hosts band
+
+Light background, above the dark footer, no cards or boxes. Label "Hosted by", then
+the two university marks at a shared 42px height.
+
+The two assets are built for opposite backgrounds, which is the whole difficulty:
+
+- `university-of-calgary-logo.jpg` is dark artwork on white, and **the artwork fills
+  only 40.2% of the image height** — measured bounding box `x 58–514, y 93–217` of a
+  576×311 file. Matching box heights therefore rendered it at roughly half the visual
+  size of the Guelph mark.
+- `university-of-guelph-logo.svg` is built for dark backgrounds: `.cls-1{fill:#fff}`.
+  On a white card its wordmark disappears and only the yellow crest survives.
+
+**Decision:** add a cropped Calgary asset at `docs/assets/university-of-calgary-logo-cropped.jpg`,
+cropped to `461×129` (ffmpeg `crop=461:129:56:91`). Its proportions then run 3.57:1
+against Guelph's 3.08:1, close enough that one shared height balances them. Calgary
+gets `grayscale(1)` with `mix-blend-mode: multiply` at `opacity .78`; Guelph gets
+`grayscale(1) brightness(.42)`, the same treatment the current live site already uses.
+The original uncropped file stays in the repository.
+
+### Footer
+
+Dark. Conference name and formal title, venue, dates, a contact link, and then the
+**Microsoft CMT acknowledgement, verbatim and unaltered**, on its own rule-separated
+full-width line at 14px — up from the 10px it is set at today:
+
+> The Microsoft CMT service was used for managing the peer-reviewing process for this
+> conference. This service was provided for free by Microsoft and they bore all
+> expenses, including costs for Azure cloud services as well as for software
+> development and support.
+
+### Call for participation page
+
+Restyled to the same system — same header, nav, type scale, row style, hosts band and
+footer. Its nav marks itself the current page. Content, section order and anchor ids
+stay as they are; the existing chip-style table of contents, the submission-types
+table with its scrollable region, the grouped dates and the template download links
+all carry over. Its small type comes up to the 13px floor.
+
+### Responsive
+
+- Programme strands collapse to one column at 860px; row lists drop to 17px.
+- Nav wraps rather than overflowing.
+- Hero type scales down; the photograph keeps its subject at phone width.
+- `prefers-reduced-motion` disables smooth scrolling.
+
+### Accessibility
+
+- Visible focus rings on every interactive element.
+- The submission-types table keeps its focusable scroll region on the CFP page.
+- Contrast checked against the new palette, particularly muted text on white and
+  footer text on `#102b2d`.
+- Hosts band logos keep their `alt` text.
+
+## Verified facts
+
+Checked against `DGGSCON-2027/program/cfp/call-for-participation-draft.md` as of
+2026-11-26; all nine dates match: papers 16 April, workshop and tutorial proposals
+30 April ("then open until the rooms are filled"), notification 31 May, camera-ready
+13 August, industry abstracts 28 May, industry notification 8 June, super early bird
+15 June, early bird and author/presenter deadline 15 July, regular registration from
+16 July. Conference 25 October (workshops), 26–27 October (main).
+
+Venue details were written for this redesign and **confirmed correct by Erin on
+2026-11-26**: Banff Centre for Arts and Creativity, 107 Tunnel Mountain Drive, Banff,
+Alberta; Calgary International (YYC) about 90 minutes by road; lecture theatres,
+breakout rooms and accommodation on site.
+
+## What is left to the builder
+
+- CSS file organisation, property order, and how much of the existing stylesheet to
+  keep versus replace.
+- Exact hover, focus and active treatments within the palette above.
+- Updating `<title>`, meta description and Open Graph tags on both pages to match the
+  new hero wording.
+- The cache-busting query on the stylesheet link.
+- Whether the hosts band appears on the CFP page as well as the homepage.
+- Favicon and logo files stay as they are.
+
+## Open, not blocking
+
+- The registration link URL does not exist yet; the placeholder stands until it does.
+- Keynote speakers, the detailed schedule and committee names are unannounced; each
+  has a "will be published here" line.
+- There is one Banff photograph. If the Venue section should carry its own image
+  later, a second photograph is needed rather than reusing the hero.
