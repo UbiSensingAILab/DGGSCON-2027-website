@@ -6,8 +6,8 @@ Branch: `redesign`
 
 > Location note: the brainstorming convention puts this under `docs/`, but `AGENTS.md`
 > publishes `docs/` through GitHub Pages, so a design document there would appear on
-> the public site. It lives at the repository root instead, alongside the other
-> maintenance material.
+> the public site. It lives outside `docs/`, at
+> `superpowers/specs/`, so it is versioned with the site but never published.
 
 ## Intent and why
 
@@ -52,11 +52,15 @@ public face of a real conference soliciting submissions and travel to Alberta.
 - No new pages beyond the existing two (homepage, call for participation).
 - No CMS, framework, build step or JavaScript dependency. The site stays buildless
   static HTML and CSS, per `AGENTS.md`.
-- No sponsors section and no organizers/committee section on the homepage — explicitly
-  declined, because the committee is largely "TBC" and there are no sponsors.
-- No countdown timer, no news/announcement feed, no tiered sponsor grid.
-- No change to the call for participation's *content*; that document is the source of
-  record and was updated separately. This redesign restyles the page, it does not rewrite it.
+- No organizers/committee section and no sponsor grid on the homepage — declined,
+  because the committee is largely "TBC" and there are no sponsors yet. A single
+  sponsorship line survives under the hosts band.
+- No countdown timer and no news/announcement feed.
+- No FAQ section. Its three answers (when and where, submitting, who hosts) are now
+  carried by Venue, Dates, the call for participation and the hosts band.
+- No change to the call for participation's *facts*. The `.md` in the planning repo is
+  the source of record; dates, section order and anchor ids are unchanged. Its headings
+  and numbered labels **are** rewritten — see "Call for participation page".
 
 ## Anti-goals
 
@@ -166,9 +170,9 @@ Nav order mirrors page order exactly, and every item resolves to a real section.
 
 | Nav label | Anchor | Section |
 |---|---|---|
-| About | `#about` | What DGGS are, who the conference is for. Lede plus two paragraphs. |
+| About | `#about` | What DGGS are, who the conference is for. Lede plus two paragraphs, closing with one sentence naming the four theme areas and linking to the full topic list on the CFP page. |
 | Dates | `#dates` | All deadlines, grouped: Full and short papers / Industry track / Registration / Conference. |
-| Programme | `#programme` | Intro line plus the three strands. |
+| Programme | `#programme` | Intro line, the three strands, the journal special issue line, and a note that schedule and keynotes follow. |
 | Venue | `#venue` | Banff Centre prose, then a facts list. |
 | Registration | `#registration` | States it is not open; holds an inert placeholder for the link. |
 | Call for Participation | `call-for-participation.html` | The one off-page link, styled as the primary button. |
@@ -190,6 +194,45 @@ Above the sections, in order:
    the 16 April date.
 
 Below the sections: the **hosts band**, then the footer.
+
+### Copy
+
+The approved mockup is the copy source, not a description of one. Text that is fixed:
+
+**Hero.** `DGGSCon 2027` / *1st International Conference on Discrete Global Grid Systems* /
+`25–27 October 2027 · Banff Centre, Banff, Alberta, Canada` / button `Call for Participation` /
+credit `Photo: Rita Taylor`, hyperlinked to the source.
+
+**Announcement band.** Tag `NOW OPEN`, then: "The call for participation is open. Full and
+short papers are due 16 April 2027, industry abstracts 28 May 2027." with `Read the call →`.
+
+**About.** Lede: "DGGS organize the Earth into systems of cells, creating a common framework
+for connecting and analysing geospatial information." Then the two paragraphs from the
+mockup, then: "Topics span the foundations of DGGS, tools, standards and interoperability,
+analysis and applications, and DGGS with GeoAI." linking to the CFP's topic list.
+
+**Programme.** Intro: "One day of workshops and tutorials on 25 October, followed by two
+days of conference sessions on 26–27 October." Three strands: *Workshops & tutorials*
+(25 October), *Research & applications* (26–27 October), *Industry & demonstrations*
+(26–27 October). Then: "Authors of accepted full papers may be invited to a journal
+special issue." — the CFP's own wording, which is softer than "will" and matches the
+source of record. Then: "The detailed schedule and keynote speakers will be published here."
+
+**Dates.** Four groups as in the CFP, plus both qualifiers: "All deadlines 23:59 Pacific
+Time (UTC−7)" below the list, and "Then open until the rooms are filled" as a sub-line on
+workshop and tutorial proposals.
+
+**Venue.** The confirmed prose and the four-row facts list, then "Accommodation and travel
+guidance will be published here."
+
+**Registration.** "Registration is not yet open" / "Fees, the registration link and
+accommodation booking will be published here. Super early bird registration closes
+15 June 2027, and every author and presenter must register by 15 July 2027." / inert
+placeholder reading `Registration link — to come`.
+
+**Hosts band.** Label `Hosted by`, the two marks, and one line beneath: "Sponsorship
+opportunities will be published here." This is where sponsorship lives; there is no
+sponsor section.
 
 ### Hosts band
 
@@ -225,11 +268,37 @@ full-width line at 14px — up from the 10px it is set at today:
 
 ### Call for participation page
 
-Restyled to the same system — same header, nav, type scale, row style, hosts band and
-footer. Its nav marks itself the current page. Content, section order and anchor ids
-stay as they are; the existing chip-style table of contents, the submission-types
-table with its scrollable region, the grouped dates and the template download links
-all carry over. Its small type comes up to the 13px floor.
+Restyled to the same system — same header, nav, type scale, row style and footer. Its
+nav marks itself the current page. The submission-types table with its scrollable
+region, the grouped dates, the template download links, section order and anchor ids
+all carry over unchanged, and its small type comes up to the 13px floor.
+
+**Its headings are rewritten**, because the page is built from the devices this project
+exists to remove: nine `01 / OVERVIEW` … `09 / COMMITTEE & CONTACT` labels, `01`–`04`
+topic numbers, split two-line headings, headings ending in periods, and the
+"A world of cells. / A community of people." closing block. Leaving them would mean half
+the public site still carries the look, and goal 1 fails.
+
+No fact, date, link or anchor id changes — presentation only:
+
+| Now | Becomes |
+|---|---|
+| `01 / OVERVIEW` + "A first gathering<br>for the DGGS community." | "Overview" |
+| `02 / TOPICS` + "Topics of interest." | "Topics of interest" |
+| `03 / SUBMISSION TYPES` + "Three ways to contribute." | "Submission types" |
+| `04 / IMPORTANT DATES` + "Important dates." | "Important dates" |
+| `05 / WORKSHOPS & TUTORIALS` + "Propose a workshop<br>or a tutorial." | "Workshops and tutorials" |
+| `06 / REVIEW` + "Review process." | "Review process" |
+| `07 / PROCEEDINGS` + "Proceedings." | "Proceedings" |
+| `08 / HOW TO SUBMIT` + "How to submit." | "How to submit" |
+| `09 / COMMITTEE & CONTACT` + "Organizing committee<br>and contact." | "Organizing committee and contact" |
+| Closing block "A world of cells. / A community of people." | Removed |
+| Topic card numbers `01`–`04` | Removed; the four group headings stay |
+
+The chip-style table of contents at the top of the page stays — it is navigation, not
+decoration — with its labels unchanged.
+
+Erin should read the new headings before this ships.
 
 ### Responsive
 
@@ -259,6 +328,28 @@ Venue details were written for this redesign and **confirmed correct by Erin on
 2026-11-26**: Banff Centre for Arts and Creativity, 107 Tunnel Mountain Drive, Banff,
 Alberta; Calgary International (YYC) about 90 minutes by road; lecture theatres,
 breakout rooms and accommodation on site.
+
+## Decisions made during the builder check
+
+A fresh reviewer read this document as if they had to build from it. Erin decided the
+first two; the rest were settled here and are recorded as my calls, not hers.
+
+1. **The CFP page's headings are rewritten**, not just restyled. Erin's decision.
+2. **Orphaned homepage content:** the journal special issue line and the sponsorship
+   line survive; the FAQ is dropped; Topics of interest is folded into the About text
+   as one sentence rather than getting its own section. Erin's decision.
+3. **Date qualifiers are kept.** Dropping the time-zone line would change what the
+   deadlines mean.
+4. **Footer "Contact" points at the CFP's contact section**, not a `mailto:`. Putting
+   a personal university address in every footer is a decision nobody has made; the
+   CFP already carries the address in context. Revisit if a conference address exists.
+5. **`globe.svg` is retired** from the homepage; the file stays in the repository.
+   Giving it a slot would introduce a third layout shape, against the discipline above.
+6. **The photo credit stays a hyperlink** to its source, as the current site has it.
+   Flagged, not resolved: Direction B depends on that photograph being usable as the
+   dominant image of the site. Nobody has checked the licence terms for that use.
+7. **No registration opening date** is published; none exists in anything available
+   here. The section states registration is not open and lists the closing dates only.
 
 ## What is left to the builder
 
