@@ -40,6 +40,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
   outline-offset:3px;
   border-radius:2px;
 }
+/* The pine ring is ~1.6:1 against the dark surfaces — effectively invisible.
+   Light ring there instead, so keyboard focus is never lost. */
+.hero a:focus-visible,
+.site-footer a:focus-visible,
+.cfp-dates a:focus-visible{outline-color:#fff}
 
 .skip-link{
   position:absolute;top:8px;left:12px;z-index:20;
@@ -131,7 +136,6 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
 /* Plain nav links mark the current page with colour; the solid .cta button
    cannot — the same colour on its own background would hide the label. */
 .site-header nav a:not(.cta)[aria-current="page"]{color:var(--pine)}
-.site-header nav .cta[aria-current="page"]{background:var(--pine-dark);color:#fff}
 
 /* ----------------------------------------------------------------- hero */
 /* The dark background carries the white type before and without the photo. */
@@ -218,7 +222,7 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
 }
 .hosts-label{
   font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
-  color:#6b7d81;
+  color:var(--muted-light);
 }
 .host{display:block}
 .host img{width:auto;height:42px}
@@ -357,6 +361,9 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
 }
 
 @media (max-width:860px){
+  /* The title wraps to three lines here while the hero keeps its height, so the
+     text rides up into the thin end of the gradient. Start it darker. */
+  .hero::after{background:linear-gradient(180deg,rgba(10,30,32,.40) 0%,rgba(10,30,32,.88) 70%)}
   .tracks{grid-template-columns:1fr;gap:24px}
   .rows li{font-size:17px}
   .hero{min-height:400px}
@@ -381,7 +388,9 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
     flex-direction:column;align-items:flex-start;
     gap:4px;font-size:16px;
   }
-  .rows b{text-align:left}
+  /* Stacked rows must be allowed to wrap: the venue address is wider than a
+     narrow phone and nowrap would push the whole page sideways. */
+  .rows b{text-align:left;white-space:normal}
   .cfp-dates-list > div{flex-direction:column;align-items:flex-start;gap:4px}
   .cfp-dates-list dd{text-align:left}
   .cfp-dates-list dt,.cfp-dates-list dd{font-size:16px}
