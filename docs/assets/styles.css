@@ -178,3 +178,27 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
   color:var(--pine);white-space:nowrap;
 }
 .announce p{margin:0}
+
+/* ------------------------------------------------------------- sections */
+.programme-intro{margin-bottom:28px;color:var(--muted)}
+
+/* The single three-column block. Everything else on the page is full width. */
+.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:4px}
+.tracks article{border-top:2px solid var(--pine);padding-top:16px}
+.tracks h3{font-size:19px;font-weight:600;margin-bottom:8px}
+.tracks p{font-size:16px;color:var(--muted);margin:0;line-height:1.7}
+
+.venue-facts{margin-top:12px}
+
+.registration{background:var(--panel)}
+.reg-panel{
+  border:1px solid #d9e2e0;background:var(--page);
+  border-radius:5px;padding:28px 30px;
+}
+.reg-panel h3{font-size:21px;font-weight:600;margin-bottom:10px}
+.reg-panel p{font-size:18px;line-height:1.75;color:var(--muted);margin-bottom:10px}
+.btn-wait{
+  display:inline-block;margin-top:8px;
+  border:1.5px dashed #a9bcb8;color:var(--muted-light);
+  padding:12px 20px;border-radius:4px;font-size:16px;font-weight:600;
+}
