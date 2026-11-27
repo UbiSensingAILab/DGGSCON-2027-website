@@ -242,6 +242,25 @@ check('nav-current-legible', () => {
   return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
 });
 
+check('toc-no-orphan', () => {
+  // A wrapping flex row drops a single chip onto its own line whenever the
+  // labels happen not to fill it. A grid wraps into aligned columns instead.
+  const s = css();
+  const rule = s.match(/\.cfp-toc\s*\{[^}]*\}/);
+  if (!rule) return { ok: false, detail: 'no .cfp-toc rule' };
+  const bad = [];
+  if (!/display\s*:\s*grid/.test(rule[0])) bad.push('.cfp-toc must be a grid, not a wrapping flex row');
+  if (!/grid-template-columns\s*:\s*repeat\(/.test(rule[0])) bad.push('.cfp-toc needs a fixed column count');
+  // The table of contents has 9 entries. A 3-column rule at mid widths makes
+  // that exactly three full rows instead of a row holding one lone chip.
+  const items = (read('call-for-participation.html').match(/<nav class="cfp-toc"[\s\S]*?<\/nav>/)?.[0].match(/<a /g) || []).length;
+  if (items !== 9) bad.push(`table of contents now has ${items} entries, not 9 — revisit the column counts`);
+  if (!/\.cfp-toc\s*\{\s*grid-template-columns\s*:\s*repeat\(3\s*,/.test(s.replace(/\s*\n\s*/g, ' '))) {
+    bad.push('no 3-column rule for mid widths');
+  }
+  return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
+});
+
 check('assets-exist', () => {
   const bad = [];
   for (const a of REQUIRED_ASSETS) if (!existsSync(join(DOCS, a))) bad.push(`missing ${a}`);

@@ -254,13 +254,20 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
   max-width:720px;margin:20px 0 0;
   font-size:20px;line-height:1.6;color:var(--muted);
 }
+/* Aligned columns rather than a wrapping row: a flex row drops a single chip
+   onto a line of its own whenever the labels do not happen to fill it. */
+/* Nine entries, so the column count is chosen to avoid a row holding one chip:
+   5 + 4 when wide, exactly 3 + 3 + 3 at mid widths, stacked on a phone. */
 .cfp-toc{
-  display:flex;flex-wrap:wrap;gap:10px 12px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px 12px;
   margin-top:34px;padding-top:26px;border-top:1px solid var(--rule);
 }
 .cfp-toc a{
+  display:block;text-align:center;
   border:1px solid #c7d4d1;border-radius:30px;
-  padding:7px 15px;font-size:14px;font-weight:500;
+  padding:9px 14px;font-size:14px;font-weight:500;
 }
 .cfp-toc a:hover{background:var(--panel);border-color:var(--pine)}
 
@@ -380,4 +387,13 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
   .cfp-dates-list dt,.cfp-dates-list dd{font-size:16px}
   .reg-panel{padding:22px 20px}
   .announce .shell{gap:8px}
+}
+
+/* Table of contents column counts. 9 entries: 5+4, then 3+3+3, then stacked. */
+@media (max-width:1040px){
+  .cfp-toc{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:560px){
+  .cfp-toc{grid-template-columns:1fr}
+  .cfp-toc a{text-align:left}
 }
