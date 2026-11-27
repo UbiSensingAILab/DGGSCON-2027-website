@@ -202,3 +202,44 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
   border:1.5px dashed #a9bcb8;color:var(--muted-light);
   padding:12px 20px;border-radius:4px;font-size:16px;font-weight:600;
 }
+
+/* ----------------------------------------------------------- hosts band */
+/* Light band, no cards. The two marks are built for opposite backgrounds:
+   Calgary is dark artwork on white, the Guelph SVG has a white-filled
+   wordmark meant for dark grounds, so each needs its own treatment to sit
+   at the same visual weight here. */
+.hosts{background:var(--page);border-top:1px solid var(--rule)}
+.hosts .shell{
+  display:flex;align-items:center;flex-wrap:wrap;
+  gap:30px 60px;padding-block:30px;
+}
+.hosts-label{
+  font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  color:#6b7d81;
+}
+.host{display:block}
+.host img{width:auto;height:42px}
+.host-calgary img{filter:grayscale(1);mix-blend-mode:multiply;opacity:.78}
+.host-guelph img{filter:grayscale(1) brightness(.42)}
+.hosts-note{margin:0;font-size:15px;color:var(--muted-light)}
+
+/* --------------------------------------------------------------- footer */
+.site-footer{
+  background:var(--footer);color:var(--footer-text);
+  padding-block:30px 36px;font-size:15px;
+}
+.site-footer .shell{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;
+}
+.site-footer p{margin:0}
+.footer-id{line-height:1.7}
+.footer-id b{font-weight:600;color:#fff}
+.site-footer a{color:#e4efec;border-bottom:1px solid rgba(228,239,236,.4)}
+.site-footer a:hover{border-color:#e4efec}
+/* Required acknowledgement: verbatim, and visible at every width. */
+.footer-ack{
+  flex-basis:100%;
+  margin-top:22px;padding-top:18px;
+  border-top:1px solid rgba(201,218,215,.25);
+  font-size:14px;line-height:1.7;color:#9fb6b3;max-width:900px;
+}
