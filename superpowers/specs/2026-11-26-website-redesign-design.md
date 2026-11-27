@@ -383,6 +383,27 @@ first two; the rest were settled here and are recorded as my calls, not hers.
 - Whether the hosts band appears on the CFP page as well as the homepage.
 - Favicon and logo files stay as they are.
 
+### Host logo sizing
+
+The two institutional lockups have very different internal proportions. Measured from
+the artwork: the wordmark is **41.1%** of the cropped Calgary image's height but only
+**23.2%** of the Guelph SVG's, so equal box heights render Calgary's type about 1.8×
+larger — which is what it looked like, and was reported twice.
+
+Sizing them by wordmark alone is wrong too, because Guelph's crest would then tower over
+Calgary's shield. The shipped compromise is `.host-calgary img{height:38px}` and
+`.host-guelph img{height:52px}`, which brings the wordmarks close while keeping the
+crests comparable. Four options are rendered side by side with the real files in
+[`2026-11-26-host-logo-sizing.html`](2026-11-26-host-logo-sizing.html); open it if the
+balance is ever revisited.
+
+### Arrival day
+
+The previous site published "Sunday, October 24 — Arrival". It is **not** in the call for
+participation, so it is not published anywhere on the redesigned site. Confirmed by Erin
+on 2026-11-26: dropping it is intended, not an oversight. Do not reinstate it unless the
+CFP gains it.
+
 ## Open, not blocking
 
 - The registration link URL does not exist yet; the placeholder stands until it does.

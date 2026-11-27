@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Host logo sizing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f2f4f4;color:#16242a;font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.6}
+.wrap{width:min(1000px,100% - 48px);margin:36px auto 60px}
+h1{font-size:26px;margin:0 0 8px;letter-spacing:-.5px}
+.intro{color:#49595e;margin:0 0 28px}
+.opt{background:#fff;border:1px solid #dfe5e5;border-radius:6px;margin-bottom:20px;overflow:hidden}
+.bar{display:flex;justify-content:space-between;gap:16px;padding:13px 20px;border-bottom:1px solid #e7ecec;font-weight:600}
+.bar span{font-weight:400;color:#5d7075;font-size:15px}
+.band{display:flex;align-items:center;gap:30px 60px;flex-wrap:wrap;padding:30px 20px;background:#fff}
+.label{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#5d7075}
+img{display:block;width:auto}
+.cal{filter:grayscale(1);mix-blend-mode:multiply;opacity:.78}
+.gue{filter:grayscale(1) brightness(.42)}
+.note{padding:0 20px 18px;font-size:15px;color:#49595e}
+mark{background:#dff0e6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Host logo sizing — which looks balanced?</h1>
+  <p class="intro">Measured: the wordmark is <b>41.1%</b> of the Calgary artwork's height but only <b>23.2%</b> of Guelph's, so equal box heights make Calgary's type look 1.8&times; bigger. These are the real files at the real treatment. Option B is what I have set now.</p>
+
+  <div class="opt">
+    <div class="bar">A — equal box heights <span>Calgary 42px · Guelph 42px</span></div>
+    <div class="band">
+      <span class="label">Hosted by</span>
+      <img class="cal" style="height:42px" src="../../docs/assets/university-of-calgary-logo-cropped.jpg" alt="University of Calgary">
+      <img class="gue" style="height:42px" src="../../docs/assets/university-of-guelph-logo.svg" alt="University of Guelph">
+    </div>
+    <p class="note">What you reported as mismatched. Crests align, wordmarks do not.</p>
+  </div>
+
+  <div class="opt">
+    <div class="bar">B — partial wordmark match <mark>(set now)</mark> <span>Calgary 38px · Guelph 52px</span></div>
+    <div class="band">
+      <span class="label">Hosted by</span>
+      <img class="cal" style="height:38px" src="../../docs/assets/university-of-calgary-logo-cropped.jpg" alt="University of Calgary">
+      <img class="gue" style="height:52px" src="../../docs/assets/university-of-guelph-logo.svg" alt="University of Guelph">
+    </div>
+    <p class="note">Splits the difference: wordmarks much closer, crests still reasonably matched.</p>
+  </div>
+
+  <div class="opt">
+    <div class="bar">C — equal wordmark cap heights <span>Calgary 34px · Guelph 60px</span></div>
+    <div class="band">
+      <span class="label">Hosted by</span>
+      <img class="cal" style="height:34px" src="../../docs/assets/university-of-calgary-logo-cropped.jpg" alt="University of Calgary">
+      <img class="gue" style="height:60px" src="../../docs/assets/university-of-guelph-logo.svg" alt="University of Guelph">
+    </div>
+    <p class="note">The typographically exact answer — but Guelph's crest now towers over Calgary's shield.</p>
+  </div>
+
+  <div class="opt">
+    <div class="bar">D — equal lockup widths <span>Calgary 45px · Guelph 52px</span></div>
+    <div class="band">
+      <span class="label">Hosted by</span>
+      <img class="cal" style="height:45px" src="../../docs/assets/university-of-calgary-logo-cropped.jpg" alt="University of Calgary">
+      <img class="gue" style="height:52px" src="../../docs/assets/university-of-guelph-logo.svg" alt="University of Guelph">
+    </div>
+    <p class="note">Both lockups occupy the same horizontal space (~160px), which often reads as balanced side by side.</p>
+  </div>
+</div>
+</body>
+</html>
