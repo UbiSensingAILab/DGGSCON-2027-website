@@ -208,6 +208,22 @@ check('cfp-table-keyboard', () => {
   return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
 });
 
+check('responsive-rules', () => {
+  const s = css();
+  const bad = [];
+  const collapse = s.match(/@media[^{]*max-width\s*:\s*860px[^{]*\{[\s\S]*?\n\}/);
+  if (!collapse) bad.push('no max-width:860px block');
+  else if (!/\.tracks\s*\{[^}]*grid-template-columns\s*:\s*1fr/.test(collapse[0])) {
+    bad.push('860px block does not collapse .tracks to one column');
+  }
+  if (!/@media\s*\(prefers-reduced-motion\s*:\s*reduce\)[\s\S]*?scroll-behavior\s*:\s*auto/.test(s)) {
+    bad.push('no reduced-motion rule');
+  }
+  if (!/:focus-visible[^{]*\{[^}]*outline\s*:/.test(s)) bad.push('no :focus-visible outline');
+  if (!/\.hero h1\s*\{[^}]*clamp\(/.test(s)) bad.push('hero h1 does not use clamp()');
+  return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
+});
+
 check('assets-exist', () => {
   const bad = [];
   for (const a of REQUIRED_ASSETS) if (!existsSync(join(DOCS, a))) bad.push(`missing ${a}`);

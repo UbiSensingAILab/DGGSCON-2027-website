@@ -338,3 +338,43 @@ h2{font-size:30px;font-weight:600;margin-bottom:20px}
 .cfp-dates-list dd > span{
   display:block;font-size:15px;font-weight:400;color:#b9c9c4;margin-top:4px;
 }
+
+/* ----------------------------------------------------------- responsive */
+@media (max-width:1000px){
+  .shell{width:calc(100% - 48px)}
+  .site-header nav{gap:18px;font-size:15px}
+  .cfp-topics{grid-template-columns:1fr;gap:32px}
+}
+
+@media (max-width:860px){
+  .tracks{grid-template-columns:1fr;gap:24px}
+  .rows li{font-size:17px}
+  .hero{min-height:400px}
+  .hero .shell{padding-block:48px 36px}
+  section{padding-block:44px}
+  .cfp-section{padding-block:40px}
+  .prose,.cfp-copy,.reg-panel p{font-size:17px}
+  .site-footer .shell{gap:18px}
+}
+
+@media (max-width:560px){
+  .shell{width:calc(100% - 36px)}
+  .site-header .shell{flex-wrap:wrap;gap:12px;padding-block:11px}
+  .site-header nav{width:100%;gap:14px 16px;font-size:15px}
+  .brand img{width:64px}
+  .brand b{font-size:18px}
+  .hero .shell{padding-block:40px 30px}
+  .hero-meta{gap:0 10px;font-size:16px}
+  .hero-meta .sep{display:none}
+  .hero-meta b{flex-basis:100%}
+  .rows li{
+    flex-direction:column;align-items:flex-start;
+    gap:4px;font-size:16px;
+  }
+  .rows b{text-align:left}
+  .cfp-dates-list > div{flex-direction:column;align-items:flex-start;gap:4px}
+  .cfp-dates-list dd{text-align:left}
+  .cfp-dates-list dt,.cfp-dates-list dd{font-size:16px}
+  .reg-panel{padding:22px 20px}
+  .announce .shell{gap:8px}
+}
