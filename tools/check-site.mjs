@@ -195,6 +195,19 @@ check('hero-contrast', () => {
   return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
 });
 
+check('cfp-table-keyboard', () => {
+  const cfp = read('call-for-participation.html');
+  const bad = [];
+  const wrapper = cfp.match(/<div class="table-scroll"[^>]*>/);
+  if (!wrapper) bad.push('no .table-scroll wrapper');
+  else {
+    if (!/tabindex="0"/.test(wrapper[0])) bad.push('scroll region not focusable');
+    if (!/role="region"/.test(wrapper[0])) bad.push('scroll region has no role');
+  }
+  if (!/\.table-scroll:focus-visible/.test(css())) bad.push('no visible focus style for the scroll region');
+  return bad.length ? { ok: false, detail: bad.join('; ') } : { ok: true };
+});
+
 check('assets-exist', () => {
   const bad = [];
   for (const a of REQUIRED_ASSETS) if (!existsSync(join(DOCS, a))) bad.push(`missing ${a}`);
